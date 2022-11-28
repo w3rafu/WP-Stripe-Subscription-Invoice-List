@@ -10,7 +10,7 @@ A WordPress plugin to display Stripe Subscriptions invoices for your subscribers
 define ('STRIPE_KEY', 'YOUR KEY HERE');
 ```
 
-1. Download and upload the plugin to your WordPress site.
+2. Download and upload the plugin to your WordPress site.
 
 ## Usage/Examples
 
