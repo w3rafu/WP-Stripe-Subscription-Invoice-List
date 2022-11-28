@@ -2,10 +2,13 @@
 /**
  * Plugin Name: Stripe Subscription Invoices List
  * Description: Display user Stripe Subscription invoices via shortcode.
- * Version: 0.1
+ * Version: 0.1.1
  * Author: Rafael Fu
  * Author URI: mailto:hi@rafaelfu.me
  */
+
+ //Create Shortcode [user-invoices]
+add_shortcode('user-invoices', 'userInvoices');
 
 //Get JS & CSS files
 add_action('wp_enqueue_scripts', 'resources');
@@ -17,7 +20,9 @@ function resources(){
 
 //Display Invoices
 function userInvoices(){
-   
+    global $post;
+    if(has_shortcode( $post->post_content, 'user-invoices' )){
+
     //Check if user is logged in
     if (is_user_logged_in()){
         //Get API key from WP
@@ -49,9 +54,12 @@ function userInvoices(){
         } else {
             return "<p>Please log-in.</p>";
         }
+        
+    } else{
+        return null;
+    }
     }
 
-//Create Shortcode [user-invoices]
-add_shortcode('user-invoices', 'userInvoices');
+
 
 
