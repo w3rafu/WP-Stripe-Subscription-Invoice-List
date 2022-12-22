@@ -13,16 +13,18 @@ add_shortcode('user-invoices', 'userInvoices');
 //Get JS & CSS files
 add_action('wp_enqueue_scripts', 'resources');
 function resources(){
-    wp_enqueue_script('request', plugins_url( 'request.js', __FILE__ ));
-    wp_register_style('style', plugins_url( 'style.css', __FILE__ ));
-    wp_enqueue_style('style');
+    global $post;
+    if(has_shortcode( $post->post_content, 'user-invoices' )){
+     wp_enqueue_script('request', plugins_url( 'request.js', __FILE__ ));
+     wp_register_style('style', plugins_url( 'style.css', __FILE__ ));
+     wp_enqueue_style('style');
+    }
 }
 
 //Display Invoices
 function userInvoices(){
     global $post;
     if(has_shortcode( $post->post_content, 'user-invoices' )){
-
     //Check if user is logged in
     if (is_user_logged_in()){
         //Get API key from WP
